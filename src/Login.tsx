@@ -6,14 +6,14 @@ function Login(props: {history: string[]}) {
     const [loading, setLoading] = useState(false)
     const username = useFormInput('')
     const password = useFormInput('')
-    const [error, setError] = useState(null)
+    const [error, setError] = useState('')
 
     // handle button click of login form
     const handleLogin = () => {
         setError(null)
         setLoading(true)
         axios
-            .post('http://localhost:3000/api/v1/users/login', {
+            .post('http://104.131.52.57:3000/api/v1/users/login', {
                 username: username.value,
                 password: password.value,
             })
@@ -26,7 +26,7 @@ function Login(props: {history: string[]}) {
                 setLoading(false)
                 console.log(error)
                 // @ts-ignore
-                setError(new Error('something wrong'))
+                setError('Wrong username or password')
                 // if (error.response.status === 401) setError(error.response.data.message)
                 // else {
                 //     // @ts-ignore
